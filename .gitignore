@@ -1,0 +1,13 @@
+# Thư mục chứa các file build
+/target/
+
+# Cấu hình của IDE
+/.vscode/
+/.idea/
+
+# File hệ thống của macOS
+.DS_Store
+
+# Các file tạm thời
+*.swp
+*.bak
