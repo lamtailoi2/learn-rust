@@ -26,6 +26,7 @@ fn main() {
         println!("\n=== CRUD Console App ===");
         println!("1. Create Student");
         println!("2. Delete Student");
+        println!("3. Update Student");
         println!("4. Display Student List");
         println!("0. Quit");
         io::stdout().flush().unwrap();
@@ -77,7 +78,35 @@ fn main() {
                     print!("Student not found!")
                 }
             }
+            "3" => {
+                if student_list.is_empty() {
+                    print!("List is empty");
+                    break;
+                }
+                print!("Enter Student ID: ");
+                io::stdout().flush().unwrap();
+                let mut update_ID = String::new();
+                io::stdin().read_line(&mut update_ID).expect("Error");
+                let mut update_ID_normalized = update_ID.trim().to_lowercase();
+                if let Some(index) = student_list
+                    .iter()
+                    .position(|student| student.id.to_lowercase() == update_ID_normalized)
+                {
+                    print!("Enter Student Name: ");
+                    io::stdout().flush().unwrap();
+                    let mut name = String::new();
+                    io::stdin().read_line(&mut name).expect("Invalid");
+                    student_list[index].name = name.trim().to_string();
 
+                    print!("Enter Student Yob: ");
+                    io::stdout().flush().unwrap();
+                    let mut yob = String::new();
+                    io::stdin().read_line(&mut yob).expect("Invalid");
+                    student_list[index].yob = yob.trim().parse().expect("Invalid");
+
+                    print!("{:?}", student_list[index].getInfo());
+                }
+            }
             "4" => {
                 if student_list.is_empty() {
                     print!("List is empty");
